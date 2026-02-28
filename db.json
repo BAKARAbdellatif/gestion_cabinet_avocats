@@ -1,0 +1,32 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "nom": "Alice Dupont",
+            "email": "alice@example.com",
+            "grade": "Junior",
+            "salaireHoraire": 25,
+            "is_admin": false
+        }
+    ],
+    "dossiers": [
+        {
+            "id_dossier": "DOC-001",
+            "titre": "Projet Alpha",
+            "proprietaire_id": 1,
+            "statut": "en cours"
+        },
+        {
+            "id_dossier": "DOC-002",
+            "titre": "Factures 2024",
+            "proprietaire_id": 1,
+            "statut": "terminé"
+        },
+        {
+            "id_dossier": "DOC-003",
+            "titre": "Rapport Stage",
+            "proprietaire_id": 2,
+            "statut": "brouillon"
+        }
+    ]
+}

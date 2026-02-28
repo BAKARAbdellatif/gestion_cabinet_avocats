@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion Cabinet — Espace Avocats</title>
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link href="./assets/css/bootstrap-icons.min.css" rel="stylesheet" />
+  <script src="./assets/js/jquery-4.0.0.min.js"></script>
+  <style>
+    :root {
+      --dark: #111111;
+      --dark2: #1c1c1c;
+      --accent: #2c2c2c;
+      --border: #e2e2e2;
+      --text: #1a1a1a;
+      --muted: #777;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #ffffff;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ---- NAVBAR ---- */
+    .navbar {
+      background-color: var(--dark) !important;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .navbar-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff !important;
+      letter-spacing: 0.02em;
+    }
+
+    .navbar-brand small {
+      font-size: 0.65rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      display: block;
+      line-height: 1;
+    }
+
+    .navbar .nav-link {
+      color: #aaa !important;
+      font-size: 0.85rem;
+      transition: color .2s;
+    }
+
+    .navbar .nav-link:hover {
+      color: #fff !important;
+    }
+
+    .btn-dark-nav {
+      background: #fff;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: none;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+
+    .btn-dark-nav:hover {
+      background: #e0e0e0;
+      color: var(--dark);
+    }
+
+    /* ---- MODAL ---- */
+    .modal-header {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-footer {
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+    }
+
+    .btn-dark-main {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      transition: background .2s;
+    }
+
+    .btn-dark-main:hover {
+      background: #2c2c2c;
+      color: #fff;
+    }
+
+    .btn-outline-dark-main {
+      background: transparent;
+      color: var(--dark);
+      border: 1px solid #ccc;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      transition: border-color .2s, background .2s;
+    }
+
+    .btn-outline-dark-main:hover {
+      border-color: var(--dark);
+      background: #f5f5f5;
+    }
+
+    .form-control,
+    .form-select {
+      border: 1px solid #d5d5d5;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      padding: 0.55rem 0.85rem;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--dark);
+      box-shadow: 0 0 0 3px rgba(17, 17, 17, .08);
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 90px 0 70px;
+      background: #fff;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--dark);
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--dark);
+      margin: 1.5rem 0;
+    }
+
+    /* ---- FEATURES ---- */
+    .features {
+      padding: 70px 0;
+      background: #f8f8f8;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feat-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.6rem;
+      height: 100%;
+      transition: border-color .25s, box-shadow .25s;
+    }
+
+    .feat-card:hover {
+      border-color: #aaa;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .feat-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--dark);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .feat-card h6 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .feat-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ---- RULES ---- */
+    .rules-section {
+      padding: 70px 0;
+    }
+
+    .rule-badge {
+      display: inline-block;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      margin-bottom: 0.6rem;
+    }
+
+    .rule-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      background: #fff;
+      height: 100%;
+    }
+
+    .rule-card h6 {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .rule-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--dark);
+      color: #666;
+      padding: 28px 0;
+      font-size: 0.8rem;
+    }
+
+    footer span {
+      color: #555;
+    }
+
+    /* ---- TABS in modal ---- */
+    .modal .nav-tabs {
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.2rem;
+    }
+
+    .modal .nav-tabs .nav-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+    }
+
+    .modal .nav-tabs .nav-link.active {
+      color: var(--dark);
+      border-bottom-color: var(--dark);
+      background: none;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp .6s ease both;
+    }
+
+    .d1 {
+      animation-delay: .1s;
+    }
+
+    .d2 {
+      animation-delay: .2s;
+    }
+
+    .d3 {
+      animation-delay: .3s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        Gestion Cabinet
+        <small>Espace Avocats</small>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" href="#">Tableau de bord</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Dossiers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Facturation</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Avocats</a></li>
+        </ul>
+        <div class="d-flex gap-2 mt-3 mt-lg-0">
+          <button class="btn-dark-nav" data-bs-toggle="modal" data-bs-target="#authModal">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Connexion
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <p class="text-uppercase" style="font-size:.72rem;letter-spacing:.12em;color:#999;font-weight:600;"
+            class="fade-up">
+            Plateforme interne · Cabinet d'avocats
+          </p>
+          <h1 class="fade-up d1">Gestion simplifiée<br />de votre cabinet</h1>
+          <div class="hero-divider fade-up d2"></div>
+          <p class="fade-up d2">
+            Suivez le temps passé sur chaque dossier, calculez automatiquement les honoraires selon le grade de
+            l'avocat, et gérez les primes de succès en toute transparence.
+          </p>
+          <div class="d-flex gap-3 flex-wrap mt-4 fade-up d3">
+            <button class="btn-dark-main" data-bs-toggle="modal" data-bs-target="#authModal">
+              <i class="bi bi-person-plus me-1"></i>Créer un compte
+            </button>
+            <button class="btn-outline-dark-main" data-bs-toggle="modal" data-bs-target="#authModal"
+              onclick="switchTab('login')">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Se connecter
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-6 fade-up d2">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="p-4 border rounded-3 text-center" style="background:#f9f9f9;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--dark);">
+                  30h</div>
+                <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">Quota hebdo Junior</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 border rounded-3 text-center" style="background:#f9f9f9;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--dark);">
+                  20h</div>
+                <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">Quota hebdo Senior</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 border rounded-3 text-center" style="background:#f9f9f9;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--dark);">
+                  ×2</div>
+                <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">Heures sup. Junior</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="p-4 border rounded-3 text-center" style="background:#f9f9f9;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--dark);">
+                  10%</div>
+                <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem;">Prime de succès</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2 class="mb-1" style="font-size:1.9rem;">Fonctionnalités clés</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:2.5rem;">Tout ce dont le cabinet a besoin pour la
+        gestion interne.</p>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+          <div class="feat-card">
+            <div class="feat-icon"><i class="bi bi-clock-history"></i></div>
+            <h6>Suivi du temps</h6>
+            <p>Enregistrez les heures passées sur chaque dossier client, par avocat.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feat-card">
+            <div class="feat-icon"><i class="bi bi-calculator"></i></div>
+            <h6>Calcul automatique</h6>
+            <p>Honoraires calculés selon les paliers horaires et le grade (Junior / Senior).</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feat-card">
+            <div class="feat-icon"><i class="bi bi-trophy"></i></div>
+            <h6>Prime de succès</h6>
+            <p>Attribution automatique de 10 % des honoraires en cas de victoire au procès.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="feat-card">
+            <div class="feat-icon"><i class="bi bi-folder2-open"></i></div>
+            <h6>Gestion des dossiers</h6>
+            <p>Statut Gagné / Perdu, date de clôture et historique complet par client.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÈGLES MÉTIER -->
+  <section class="rules-section">
+    <div class="container">
+      <h2 class="mb-1" style="font-size:1.9rem;">Règles de facturation</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:2.5rem;">Logique appliquée automatiquement à chaque
+        dossier clôturé.</p>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="rule-card">
+            <div class="rule-badge">Junior</div>
+            <h6>Quota : 30h / semaine</h6>
+            <p>Heures dans le quota : tarif horaire normal.<br />Heures supplémentaires : tarif × 2.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="rule-card">
+            <div class="rule-badge">Senior</div>
+            <h6>Quota : 20h / semaine</h6>
+            <p>Heures dans le quota : tarif horaire normal.<br />Heures supplémentaires : tarif × 1.5.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="rule-card">
+            <div class="rule-badge">Succès</div>
+            <h6>Prime de victoire</h6>
+            <p>Si le dossier est marqué « Gagné » par l'Admin, l'avocat reçoit 10 % des honoraires totaux du dossier.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <span style="color:#555;font-family:'Cormorant Garamond',serif;font-size:1rem;">Gestion Cabinet</span>
+      <span>© 2025 · Plateforme interne · Tous droits réservés</span>
+    </div>
+  </footer>
+
+  <!-- MODAL AUTH -->
+  <div class="modal fade" id="authModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:420px;">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header px-4 pt-4 pb-0 border-0">
+          <h5 class="modal-title">Accès à l'espace cabinet</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4 pb-4">
+          <!-- Tabs -->
+          <ul class="nav nav-tabs" id="authTabs">
+            <li class="nav-item">
+              <button class="nav-link active" id="tab-login" onclick="switchTab('login')">Connexion</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" id="tab-register" onclick="switchTab('register')">Inscription</button>
+            </li>
+          </ul>
+
+          <!-- LOGIN -->
+          <div id="pane-login">
+            <div class="mb-3">
+              <label class="form-label">Adresse email</label>
+              <input type="email" class="form-control" placeholder="avocat@cabinet.fr" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mot de passe</label>
+              <input type="password" class="form-control" placeholder="••••••••" />
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="remember" />
+                <label class="form-check-label" for="remember" style="font-size:.82rem;">Se souvenir de moi</label>
+              </div>
+              <a href="#" style="font-size:.82rem;color:var(--muted);text-decoration:none;">Mot de passe oublié ?</a>
+            </div>
+            <button class="btn-dark-main w-100">Se connecter</button>
+          </div>
+
+          <!-- REGISTER -->
+          <div id="pane-register" style="display:none;">
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label class="form-label">Nom</label>
+                <input type="text" id="r-nom" name="r-nom" class="form-control" placeholder="Jean" />
+              </div>
+              <div class="col-6">
+                <label class="form-label">Grade</label>
+                <select class="form-select" id="r-grade" name="r-grade">
+                  <option value="" disabled selected>grade</option>
+                  <option>Junior</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Adresse email</label>
+              <input type="email" id="r-email" name="r-email" class="form-control" placeholder="avocat@cabinet.fr" />
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" placeholder="••••••••" />
+              </div>
+
+              <div class="col-6">
+                <label class="form-label">Confirmation mot de passe</label>
+                <input type="password" class="form-control" placeholder="••••••••" />
+              </div>
+            </div>
+            <button class="btn-dark-main w-100">Créer mon compte</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('pane-login').style.display = isLogin ? 'block' : 'none';
+      document.getElementById('pane-register').style.display = isLogin ? 'none' : 'block';
+      document.getElementById('tab-login').classList.toggle('active', isLogin);
+      document.getElementById('tab-register').classList.toggle('active', !isLogin);
+    }
+  </script>
+  <script src="./scripts/index.js"></script>
+
+</body>
+
+</html>
