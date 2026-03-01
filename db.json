@@ -1,32 +1,42 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "nom": "Alice Dupont",
-            "email": "alice@example.com",
-            "grade": "Junior",
-            "salaireHoraire": 25,
-            "is_admin": false
-        }
-    ],
-    "dossiers": [
-        {
-            "id_dossier": "DOC-001",
-            "titre": "Projet Alpha",
-            "proprietaire_id": 1,
-            "statut": "en cours"
-        },
-        {
-            "id_dossier": "DOC-002",
-            "titre": "Factures 2024",
-            "proprietaire_id": 1,
-            "statut": "terminé"
-        },
-        {
-            "id_dossier": "DOC-003",
-            "titre": "Rapport Stage",
-            "proprietaire_id": 2,
-            "statut": "brouillon"
-        }
-    ]
+  "users": [
+    {
+      "id": "6773",
+      "name": "Abdellatif",
+      "grade": "Senior",
+      "email": "bakar@gmail.com",
+      "password": "6d219f040ea5a17849892262a3f8c789c53527b87f7c6f0e7f7d93efb85fe7ba"
+    },
+    {
+      "id": "ad7e",
+      "name": "Abakar",
+      "grade": "Senior",
+      "email": "abakar@gmail.com",
+      "password": "6d219f040ea5a17849892262a3f8c789c53527b87f7c6f0e7f7d93efb85fe7ba"
+    }
+  ],
+  "dossiers": [
+    {
+      "id_dossier": "DOC-001",
+      "titre": "Projet Alpha",
+      "proprietaire_id": 1,
+      "statut": "en cours",
+      "id": "d8a2"
+    },
+    {
+      "id_dossier": "DOC-002",
+      "titre": "Factures 2024",
+      "proprietaire_id": 1,
+      "statut": "terminé",
+      "id": "b64e"
+    },
+    {
+      "id_dossier": "DOC-003",
+      "titre": "Rapport Stage",
+      "proprietaire_id": 2,
+      "statut": "brouillon",
+      "id": "d110"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
