@@ -106,31 +106,18 @@ $(document).ready(() => {
     }
 
     var emailExist = (email) => {
-        $.ajax({
-            url: 'http://localhost:3000/users?email=' + email,
-            method: 'GET',
-            success: (data) => {
-                return data.length > 0
-            },
-            error: (err) => {
-                console.error('Error checking email:', err);
-                return false
-            }
-        })
-    }
-    var emailExist = (email) => {
         let resultat;
 
         $.ajax({
             url: 'http://localhost:3000/users?email=' + email,
             method: 'GET',
-            async: false, // BLOQUE l'exécution jusqu'à la réponse
+            async: false,
             success: (data) => {
                 resultat = data.length > 0;
             }
         });
 
-        return resultat; // Ici, ça marchera enfin !
+        return resultat;
     }
 
 
