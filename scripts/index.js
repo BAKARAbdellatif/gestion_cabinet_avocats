@@ -1,11 +1,13 @@
 
 
 $(document).ready(() => {
+
     $("#registerBtn").click((event) => {
         let errors = 0
         // reset validation messages
         $(".feedbak").text('')
         $(".formItem").removeClass('is-invalid');
+        console.log("Après removeClass:", $(".formItem.is-invalid").length); // doit afficher 0
         // Validation Nom
         let nom = $("#r-nom")
         let regexNom = /^[a-zA-Z\s]+$/;
@@ -51,7 +53,7 @@ $(document).ready(() => {
         let passwordConfirm = $("#r-password-confirm")
         if (password.val() === '') {
             $("#invalid-password-feedbak").text('Veuillez entrer un mot de passe');
-            email.addClass('is-invalid');
+            password.addClass('is-invalid');
             errors++
         }
         if (passwordConfirm.val() === '') {
@@ -70,7 +72,8 @@ $(document).ready(() => {
                     name: nom.val(),
                     grade: grade.val(),
                     email: email.val(),
-                    password: passwordHache
+                    password: passwordHache,
+                    is_admin: false
                 };
                 registerUser(user)
                 console.log("Utilisateur créé avec succès :", user);
@@ -89,6 +92,36 @@ $(document).ready(() => {
             success: (data) => {
                 alert('User registered successfully');
                 switchTab("login")
+            },
+            error: (err) => {
+                console.error('Error registering user:', err);
+            }
+        })
+    }
+
+
+    var loginUser = (user) => {
+        $.ajax({
+            url: 'http://localhost:3000/users?email=' + user.email + '&password=' + user.password,
+            method: 'GET',
+            success: (data) => {
+                if (data.length > 0) {
+                    let user = data[0];
+                    console.log("Utilisateur connecté avec succès :", user);
+                    localStorage.setItem("username", user.name);
+                    localStorage.setItem("userId", user.id);
+                    localStorage.setItem("is_admin", user.is_admin);
+
+                    // display all localstorage data
+                    console.log("Données stockées dans localStorage :");
+                    for (let i = 0; i < localStorage.length; i++) {
+                        let key = localStorage.key(i);
+                        let value = localStorage.getItem(key);
+                        console.log(key + ": " + value);
+                    }
+                    //localStorage.setItem("user", JSON.stringify(data[0]));
+                    //window.location.href = "home.html";
+                }
             },
             error: (err) => {
                 console.error('Error registering user:', err);
@@ -120,6 +153,66 @@ $(document).ready(() => {
         return resultat;
     }
 
+    $("#loginBtn").click((event) => {
+        event.preventDefault();
+        let email = $("#l-email")
+        let password = $("#l-password")
+        let errors = 0
+        // reset validation messages
+        $(".feedbak").text('')
+        $(".formItem").removeClass('is-invalid');
 
+        if (email.val() === '' || password.val() === '') {
+            //validation email
+            let email = $("#l-email")
+            let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.val() === '') {
+                $("#invalid-login-email-feedbak").text('Veuillez entrer une adresse email');
+                email.addClass('is-invalid');
+                errors++
+            } else if (!regexEmail.test(email.val())) {
+                $("#invalid-login-email-feedbak").text('Veuillez entrer une adresse email valide');
+                email.addClass('is-invalid');
+                errors++
+            }
+            // validation password
+            let password = $("#l-password")
+            if (password.val() === '') {
+                $("#invalid-login-password-feedbak").text('Veuillez entrer un mot de passe');
+                password.addClass('is-invalid');
+                errors++
+            }
+        } else {
+            if ($("#remember").get(0).checked) {
+                localStorage.setItem("email", $("#l-email").val());
+                localStorage.setItem("password", $("#l-password").val());
+            }
+        }
+
+        if (errors === 0) {
+            hashPassword(password.val()).then(passwordHache => {
+                let user = {
+                    email: email.val(),
+                    password: passwordHache
+                };
+                loginUser(user)
+            });
+        }
+
+
+    })
+
+    getIdentifiant = () => {
+        if (localStorage.getItem("email") != undefined && localStorage.getItem("password") != undefined) {
+            $("#l-email").val(localStorage.getItem("email"));
+            $("#l-password").val(localStorage.getItem("password"));
+        }
+    }
+
+    resetForms = () => {
+        document.getElementById("registerForm").reset();
+        document.getElementById("loginForm").reset();
+        $(".feedbak").text('');
+        $(".formItem").removeClass('is-invalid');
+    }
 })
-
