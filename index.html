@@ -9,331 +9,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link href="./assets/css/bootstrap-icons.min.css" rel="stylesheet" />
   <script src="./assets/js/jquery-4.0.0.min.js"></script>
-  <style>
-    :root {
-      --dark: #111111;
-      --dark2: #1c1c1c;
-      --accent: #2c2c2c;
-      --border: #e2e2e2;
-      --text: #1a1a1a;
-      --muted: #777;
-    }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #ffffff;
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    h1,
-    h2,
-    h3,
-    .font-serif {
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    /* ---- NAVBAR ---- */
-    .navbar {
-      background-color: var(--dark) !important;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid #2a2a2a;
-    }
-
-    .navbar-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #fff !important;
-      letter-spacing: 0.02em;
-    }
-
-    .navbar-brand small {
-      font-size: 0.65rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #888;
-      display: block;
-      line-height: 1;
-    }
-
-    .navbar .nav-link {
-      color: #aaa !important;
-      font-size: 0.85rem;
-      transition: color .2s;
-    }
-
-    .navbar .nav-link:hover {
-      color: #fff !important;
-    }
-
-    .btn-dark-nav {
-      background: #fff;
-      color: var(--dark);
-      font-weight: 600;
-      font-size: 0.85rem;
-      border: none;
-      padding: 0.45rem 1.1rem;
-      border-radius: 6px;
-      transition: background .2s, color .2s;
-    }
-
-    .btn-dark-nav:hover {
-      background: #e0e0e0;
-      color: var(--dark);
-    }
-
-    /* ---- MODAL ---- */
-    .modal-header {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .modal-footer {
-      border-top: 1px solid var(--border);
-    }
-
-    .modal-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-    }
-
-    .btn-dark-main {
-      background: var(--dark);
-      color: #fff;
-      border: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      transition: background .2s;
-    }
-
-    .btn-dark-main:hover {
-      background: #2c2c2c;
-      color: #fff;
-    }
-
-    .btn-outline-dark-main {
-      background: transparent;
-      color: var(--dark);
-      border: 1px solid #ccc;
-      font-weight: 500;
-      font-size: 0.9rem;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      transition: border-color .2s, background .2s;
-    }
-
-    .btn-outline-dark-main:hover {
-      border-color: var(--dark);
-      background: #f5f5f5;
-    }
-
-    .form-control,
-    .form-select {
-      border: 1px solid #d5d5d5;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      padding: 0.55rem 0.85rem;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-      border-color: var(--dark);
-      box-shadow: 0 0 0 3px rgba(17, 17, 17, .08);
-    }
-
-    .form-label {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #444;
-      margin-bottom: 0.3rem;
-    }
-
-    /* ---- HERO ---- */
-    .hero {
-      padding: 90px 0 70px;
-      background: #fff;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--dark);
-    }
-
-    .hero p {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.7;
-    }
-
-    .hero-divider {
-      width: 48px;
-      height: 3px;
-      background: var(--dark);
-      margin: 1.5rem 0;
-    }
-
-    /* ---- FEATURES ---- */
-    .features {
-      padding: 70px 0;
-      background: #f8f8f8;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .feat-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.6rem;
-      height: 100%;
-      transition: border-color .25s, box-shadow .25s;
-    }
-
-    .feat-card:hover {
-      border-color: #aaa;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    }
-
-    .feat-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--dark);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      flex-shrink: 0;
-    }
-
-    .feat-card h6 {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .feat-card p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* ---- RULES ---- */
-    .rules-section {
-      padding: 70px 0;
-    }
-
-    .rule-badge {
-      display: inline-block;
-      background: var(--dark);
-      color: #fff;
-      border-radius: 4px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      margin-bottom: 0.6rem;
-    }
-
-    .rule-card {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      background: #fff;
-      height: 100%;
-    }
-
-    .rule-card h6 {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .rule-card p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* ---- FOOTER ---- */
-    footer {
-      background: var(--dark);
-      color: #666;
-      padding: 28px 0;
-      font-size: 0.8rem;
-    }
-
-    footer span {
-      color: #555;
-    }
-
-    /* ---- TABS in modal ---- */
-    .modal .nav-tabs {
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 1.2rem;
-    }
-
-    .modal .nav-tabs .nav-link {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--muted);
-      border: none;
-      padding: 0.5rem 1rem;
-      border-bottom: 2px solid transparent;
-      border-radius: 0;
-    }
-
-    .modal .nav-tabs .nav-link.active {
-      color: var(--dark);
-      border-bottom-color: var(--dark);
-      background: none;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-up {
-      animation: fadeUp .6s ease both;
-    }
-
-    .d1 {
-      animation-delay: .1s;
-    }
-
-    .d2 {
-      animation-delay: .2s;
-    }
-
-    .d3 {
-      animation-delay: .3s;
-    }
-  </style>
+  <script src="./scripts/conntectedUser.js"></script>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 
 <body>
@@ -350,8 +29,8 @@
       </button>
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav mx-auto gap-1">
-          <li class="nav-item"><a class="nav-link" href="#">Tableau de bord</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Dossiers</a></li>
+          <li class="nav-item"><a class="nav-link" href="./pages/dashbord.html">Tableau de bord</a></li>
+          <li class="nav-item"><a class="nav-link" href="./pages/dossiers.html">Dossiers</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Facturation</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Avocats</a></li>
         </ul>
@@ -364,13 +43,15 @@
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-
+                  data-bs-toggle="dropdown" aria-expanded="false" style="color:#aaa !important; font-size:0.85rem;">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                  <li><a class="dropdown-item" href="#">liste des utilisateurs</a></li>
-                  <li><a class="dropdown-item" href="#">Se déconnecter</a></li>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"
+                  style="background-color:#1c1c1c; border:1px solid #2a2a2a; border-radius:6px;">
+                  <li><a class="dropdown-item" href="#" style="color:#aaa; font-size:0.85rem;">Mon profil</a></li>
+                  <li><a class="dropdown-item" href="#" style="color:#aaa; font-size:0.85rem;">Liste des
+                      utilisateurs</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="deconnexion()"
+                      style="color:#aaa; font-size:0.85rem;">Se déconnecter</a></li>
                 </ul>
               </li>
             </ul>
@@ -622,7 +303,6 @@
     }
   </script>
   <script src="./scripts/index.js"></script>
-  <script src="./scripts/conntectedUser.js"></script>
 </body>
 
 </html>

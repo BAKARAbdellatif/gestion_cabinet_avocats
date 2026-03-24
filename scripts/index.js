@@ -112,15 +112,12 @@ $(document).ready(() => {
                     localStorage.setItem("userId", user.id);
                     localStorage.setItem("is_admin", user.is_admin);
 
-                    // display all localstorage data
-                    console.log("Données stockées dans localStorage :");
-                    for (let i = 0; i < localStorage.length; i++) {
-                        let key = localStorage.key(i);
-                        let value = localStorage.getItem(key);
-                        console.log(key + ": " + value);
-                    }
-                    //localStorage.setItem("user", JSON.stringify(data[0]));
-                    //window.location.href = "home.html";
+                    let uri = window.location.pathname
+
+                    base_url = uri.split("Gestion_cabinet")
+                    home_page = base_url[0] + "Gestion_cabinet/pages/dashbord.html"
+                    window.location.href = home_page
+
                 }
             },
             error: (err) => {
